@@ -38,3 +38,9 @@
 ## 2026-10-17　Google Search Console
 
 - 用户在 Search Console 添加「网址前缀」资源，HTML 标记验证；验证码写入 `_config.yml` 的 `webmaster_verifications.google`（jekyll-seo-tag 输出 meta）。
+
+## 2026-10-17　仓库重建
+
+- 开发日志中曾写入不应公开的部署细节；清理全部历史后，删除并重建仓库，避免旧版本仍可从提交历史中查到。所有提交统一使用 noreply 邮箱。
+- README 改为简短介绍。
+- 教训：开发日志是公开的，只记录与网站本身有关的内容，不写账号、本机环境等信息。
