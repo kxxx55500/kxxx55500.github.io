@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   {%- comment -%} 非阻塞加载：苹果设备直接用宋体-简，不会下载；网络不通时也不卡页面 {%- endcomment %}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&display=swap" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
 </head>
 <body class="{{ page.body_class | default: 'page' }}">

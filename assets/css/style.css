@@ -175,8 +175,12 @@ a:hover { color: var(--accent); }
 
 .work-link:hover .work-title { color: var(--accent); }
 
-/* 手机：插画作横幅置顶，标题居中 */
-@media (max-width: 859px) {
+/* 手机 / 窄窗口：插画作横幅置顶，标题居中；宽度不超过正文版心 */
+@media (max-width: 759px) {
+  .home-grid {
+    max-width: var(--measure);
+    margin: 0 auto;
+  }
   .frontispiece img {
     aspect-ratio: 4 / 3;
     object-fit: cover;
@@ -191,7 +195,7 @@ a:hover { color: var(--accent); }
 }
 
 /* 电脑：左图右文，图片随页面停留 */
-@media (min-width: 860px) {
+@media (min-width: 760px) {
   .home-grid {
     display: grid;
     grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
