@@ -7,9 +7,9 @@ lang: zh-CN
 url: https://kxxx55500.github.io
 baseurl: ""
 
-# Google Search Console 验证码（拿到后填在这里，去掉前面的 #）
-# webmaster_verifications:
-#   google: xxxxxxxxxxxxxxxx
+# Google Search Console 验证码
+webmaster_verifications:
+  google: 5tHqURtXPgn8oTiytuL5x7HDRqw_y7DCnw_kdv06DUs
 
 # ———— 内容结构 ————
 collections:

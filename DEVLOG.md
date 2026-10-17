@@ -34,3 +34,7 @@
 - 原因（已复现）：GitHub Pages 对静态文件 `cache-control: max-age=600`，浏览器拿到新 index.html 却沿用缓存的旧 style.css；旧样式里没有 .frontispiece 规则，图片按 width=1000 显示为 1000×1250。
 - 次要问题：窗口宽 760–859px 时走手机布局，横幅撑满容器（800px 宽时 760×570）。
 - 修复：style.css 链接加 `?v={{ site.time | date: '%s' }}`，每次构建换地址；双栏断点 860 → 760px；窄屏首页宽度限制为正文版心。验证 390/700/800/1024/1440 宽度下图片尺寸均正常、无横向滚动。
+
+## 2026-10-17　Google Search Console
+
+- 用户在 Search Console 添加「网址前缀」资源，HTML 标记验证；验证码写入 `_config.yml` 的 `webmaster_verifications.google`（jekyll-seo-tag 输出 meta）。
