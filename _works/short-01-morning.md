@@ -2,9 +2,7 @@
 title: 早晨
 key: short-01-morning
 kind: short
-status: ''
 date: 2026-10-17
-description: ''
 published: true
 ---
 

@@ -1,7 +1,7 @@
 # ———— 站点信息（按需修改） ————
-title: 未名集
+title: 疗愈系奇幻写作
 tagline: 一些写下的故事
-description: kx555 的个人文学作品集，收录短篇小说与长篇连载，公开阅读。
+description: 疗愈系奇幻小说的个人写作与收藏，收录短篇与长篇连载，公开阅读。
 author: kx555
 lang: zh-CN
 url: https://kxxx55500.github.io
@@ -29,6 +29,8 @@ defaults:
     values: { layout: page }
   - scope: { path: admin }
     values: { sitemap: false }
+  - scope: { path: "" }
+    values: { image: /assets/images/og.jpg }   # 分享到社交平台时的预览图
 
 # 单个换行也视为分段（粘贴文本更省心）
 markdown: kramdown
@@ -46,3 +48,4 @@ exclude:
   - README.md
   - DEVLOG.md
   - vendor
+  - figures      # 原图仅作存档，网站用 assets/images 里的压缩版

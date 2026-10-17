@@ -1,8 +1,9 @@
 {%- comment -%}
-  正文整理：单个换行（<br />）转成新段落；去掉段首手打的全角空格（缩进由样式统一处理）。
+  正文整理：单个换行（<br />）转成新段落；去掉段首手打的全角空格（缩进由样式统一处理）；
+  后台编辑器会把 *** 存成 \* \* \*，这里也识别为场景分隔线。
 {%- endcomment -%}
 {%- assign text = include.text | replace: "<br />", "</p>
-<p>" | replace: "<p>　　", "<p>" | replace: "<p>　", "<p>" -%}
+<p>" | replace: "<p>　　", "<p>" | replace: "<p>　", "<p>" | replace: "<p>* * *</p>", "<hr />" | replace: "<p>***</p>", "<hr />" -%}
 <div class="prose">
 {{ text }}
 </div>

@@ -3,32 +3,46 @@ layout: default
 body_class: home
 ---
 {%- assign works = site.works | sort: "date" | reverse -%}
-<section class="intro">
-  <h1 class="intro-title">{{ site.title }}</h1>
-  {%- if site.tagline %}<p class="intro-tagline">{{ site.tagline }}</p>{% endif %}
-</section>
+<div class="home-grid">
+  <figure class="frontispiece">
+    <img src="{{ '/assets/images/frontispiece-640.webp' | relative_url }}"
+         srcset="{{ '/assets/images/frontispiece-640.webp' | relative_url }} 640w, {{ '/assets/images/frontispiece-1000.webp' | relative_url }} 1000w"
+         sizes="(min-width: 860px) 420px, 100vw"
+         width="1000" height="1250" fetchpriority="high"
+         alt="插画：开满白花的石板街上，抱着书的金发少年回眸微笑，远处是河、石桥与城堡">
+  </figure>
 
-<section class="works">
-  {%- if works.size > 0 %}
-  <ul class="work-list">
-    {%- for w in works %}
-    {%- assign n = site.chapters | where: "work", w.slug | size %}
-    <li class="work-item">
-      <a class="work-link" href="{{ w.url | relative_url }}">
-        <h2 class="work-title">{{ w.title }}</h2>
-        <p class="work-meta">
-          {%- if w.kind == "long" -%}
-            长篇{% if w.status %} · {{ w.status }}{% endif %} · {{ n }} 章
-          {%- else -%}
-            短篇
-          {%- endif %} · <time datetime="{{ w.date | date_to_xmlschema }}">{{ w.date | date: "%Y.%m.%d" }}</time>
-        </p>
-        {%- if w.description %}<p class="work-desc">{{ w.description }}</p>{% endif %}
-      </a>
-    </li>
-    {%- endfor %}
-  </ul>
-  {%- else %}
-  <p class="empty">暂无作品。</p>
-  {%- endif %}
-</section>
+  <div class="home-body">
+    <section class="intro">
+      <h1 class="intro-title">{{ site.title }}</h1>
+      {%- if site.tagline %}<p class="intro-tagline">{{ site.tagline }}</p>{% endif %}
+    </section>
+
+    <section class="works">
+      {%- if works.size > 0 %}
+      <ul class="work-list">
+        {%- for w in works %}
+        {%- assign n = site.chapters | where: "work", w.slug | size %}
+        {%- assign desc = w.description | strip %}
+        {%- assign status = w.status | strip %}
+        <li class="work-item">
+          <a class="work-link" href="{{ w.url | relative_url }}">
+            <h2 class="work-title">{{ w.title }}</h2>
+            <p class="work-meta">
+              {%- if w.kind == "long" -%}
+                长篇{% if status != "" %} · {{ status }}{% endif %} · {{ n }} 章
+              {%- else -%}
+                短篇
+              {%- endif %} · <time datetime="{{ w.date | date_to_xmlschema }}">{{ w.date | date: "%Y.%m.%d" }}</time>
+            </p>
+            {%- if desc != "" %}<p class="work-desc">{{ desc }}</p>{% endif %}
+          </a>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <p class="empty">暂无作品。</p>
+      {%- endif %}
+    </section>
+  </div>
+</div>

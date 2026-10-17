@@ -14,6 +14,8 @@ site_url: https://kxxx55500.github.io
 display_url: https://kxxx55500.github.io
 media_folder: assets/images
 public_folder: /assets/images
+output:
+  omit_empty_optional_fields: true   # 留空的选填项不写入文件
 
 collections:
   - name: works
@@ -64,6 +66,7 @@ collections:
       - name: body
         label: 正文（短篇）／前言（长篇，可留空）
         widget: markdown
+        editor_components: [image, hr]
         required: false
 
   - name: chapters
@@ -104,6 +107,7 @@ collections:
       - name: body
         label: 正文
         widget: markdown
+        editor_components: [image, hr]
 
   - name: pages
     label: 页面

@@ -2,15 +2,17 @@
 layout: default
 ---
 {%- assign chapters = site.chapters | where: "work", page.slug | sort: "order" -%}
+{%- assign desc = page.description | strip -%}
+{%- assign status = page.status | strip -%}
 <article class="article">
   <header class="article-head">
-    <p class="article-kicker">{% if page.kind == "long" %}长篇{% if page.status %}　·　{{ page.status }}{% endif %}{% else %}短篇{% endif %}</p>
+    <p class="article-kicker">{% if page.kind == "long" %}长篇{% if status != "" %}　·　{{ status }}{% endif %}{% else %}短篇{% endif %}</p>
     <h1 class="article-title">{{ page.title }}</h1>
     <p class="article-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y 年 %-m 月 %-d 日" }}</time></p>
   </header>
 
   {%- if page.kind == "long" %}
-    {%- if page.description %}<p class="work-summary">{{ page.description }}</p>{% endif %}
+    {%- if desc != "" %}<p class="work-summary">{{ desc }}</p>{% endif %}
     {%- assign intro = content | strip -%}
     {%- if intro != "" %}{% include prose.html text=content %}{% endif %}
 
