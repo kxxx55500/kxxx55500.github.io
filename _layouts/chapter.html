@@ -1,0 +1,26 @@
+---
+layout: default
+---
+{%- assign work = site.works | where: "slug", page.work | first -%}
+{%- assign chapters = site.chapters | where: "work", page.work | sort: "order" -%}
+{%- for c in chapters -%}
+  {%- if c.url == page.url -%}
+    {%- assign i = forloop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign prev_i = i | minus: 1 -%}
+{%- assign next_i = i | plus: 1 -%}
+<article class="article">
+  <header class="article-head">
+    {%- if work %}<p class="article-kicker"><a href="{{ work.url | relative_url }}">{{ work.title }}</a></p>{% endif %}
+    <h1 class="article-title">{{ page.title }}</h1>
+  </header>
+
+  {% include prose.html text=content %}
+
+  <nav class="chapter-nav">
+    {%- if i > 0 %}<a class="prev" href="{{ chapters[prev_i].url | relative_url }}">上一章</a>{% else %}<span class="prev"></span>{% endif %}
+    {%- if work %}<a class="index" href="{{ work.url | relative_url }}">目录</a>{% endif %}
+    {%- if next_i < chapters.size %}<a class="next" href="{{ chapters[next_i].url | relative_url }}">下一章</a>{% else %}<span class="next"></span>{% endif %}
+  </nav>
+</article>

@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: kxxx55500/kxxx55500.github.io
+  branch: main
+  auth_methods: [token]   # 只用访问令牌登录，无需 OAuth 服务器
+  commit_messages:
+    create: "新增 {{collection}}：{{slug}}"
+    update: "修改 {{collection}}：{{slug}}"
+    delete: "删除 {{collection}}：{{slug}}"
+
+site_url: https://kxxx55500.github.io
+display_url: https://kxxx55500.github.io
+media_folder: assets/images
+public_folder: /assets/images
+
+collections:
+  - name: works
+    label: 作品
+    label_singular: 作品
+    description: 短篇直接在「正文」里写全文；长篇在这里写简介，章节到「章节」里逐章发布。
+    folder: _works
+    create: true
+    slug:
+      template: "{{key}}"
+      editable: false
+    summary: "{{title}}　·　{{kind}}　·　{{date | date('YYYY-MM-DD')}}"
+    sortable_fields: [date, title]
+    fields:
+      - name: title
+        label: 标题
+      - name: key
+        label: 网址名
+        hint: 用拼音或英文，小写、可用连字符，例如 yu-ye。作品网址会是 /works/yu-ye/，保存后不可更改。
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', '只能用小写字母、数字和连字符']
+      - name: kind
+        label: 类型
+        widget: select
+        default: short
+        options:
+          - { label: 短篇, value: short }
+          - { label: 长篇（分章节）, value: long }
+      - name: status
+        label: 连载状态（仅长篇）
+        widget: select
+        required: false
+        options: [连载中, 已完结]
+      - name: date
+        label: 发布日期
+        widget: datetime
+        type: date
+        default: "{{now}}"
+      - name: description
+        label: 简介
+        hint: 一两句话。会显示在首页列表，也是搜索引擎看到的摘要。
+        widget: text
+        required: false
+      - name: published
+        label: 公开
+        hint: 关闭后网站上不显示（相当于草稿）。
+        widget: boolean
+        default: true
+      - name: body
+        label: 正文（短篇）／前言（长篇，可留空）
+        widget: markdown
+        required: false
+
+  - name: chapters
+    label: 章节
+    label_singular: 章节
+    description: 长篇的各个章节。先在「作品」里建好长篇，再来这里添加章节。
+    folder: _chapters
+    create: true
+    path: "{{work}}/{{slug}}"
+    slug:
+      template: "{{order}}"
+      editable: false
+    summary: "{{work}}　·　{{title}}"
+    sortable_fields: [work, order]
+    view_groups:
+      - { label: 作品, field: work }
+    fields:
+      - name: work
+        label: 所属作品
+        widget: relation
+        collection: works
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+      - name: order
+        label: 章节序号
+        hint: 决定章节顺序，也是网址的一部分（如 /works/chang-he/3/），保存后不可更改。
+        widget: number
+        value_type: int
+        min: 1
+      - name: title
+        label: 章节标题
+        hint: 例如「第三章　归途」
+      - name: published
+        label: 公开
+        widget: boolean
+        default: true
+      - name: body
+        label: 正文
+        widget: markdown
+
+  - name: pages
+    label: 页面
+    files:
+      - name: about
+        label: 关于
+        file: about.md
+        fields:
+          - { name: title, label: 标题 }
+          - { name: permalink, label: 网址, widget: hidden, default: /about/ }
+          - { name: body, label: 正文, widget: markdown }

@@ -1,0 +1,48 @@
+# ———— 站点信息（按需修改） ————
+title: 未名集
+tagline: 一些写下的故事
+description: kx555 的个人文学作品集，收录短篇小说与长篇连载，公开阅读。
+author: kx555
+lang: zh-CN
+url: https://kxxx55500.github.io
+baseurl: ""
+
+# Google Search Console 验证码（拿到后填在这里，去掉前面的 #）
+# webmaster_verifications:
+#   google: xxxxxxxxxxxxxxxx
+
+# ———— 内容结构 ————
+collections:
+  works:
+    output: true
+    permalink: /works/:path/
+  chapters:
+    output: true
+    permalink: /works/:path/
+
+defaults:
+  - scope: { type: works }
+    values: { layout: work }
+  - scope: { type: chapters }
+    values: { layout: chapter }
+  - scope: { path: "" , type: pages }
+    values: { layout: page }
+  - scope: { path: admin }
+    values: { sitemap: false }
+
+# 单个换行也视为分段（粘贴文本更省心）
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: true
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - DEVLOG.md
+  - vendor

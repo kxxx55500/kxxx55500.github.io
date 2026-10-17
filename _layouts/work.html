@@ -1,0 +1,33 @@
+---
+layout: default
+---
+{%- assign chapters = site.chapters | where: "work", page.slug | sort: "order" -%}
+<article class="article">
+  <header class="article-head">
+    <p class="article-kicker">{% if page.kind == "long" %}长篇{% if page.status %}　·　{{ page.status }}{% endif %}{% else %}短篇{% endif %}</p>
+    <h1 class="article-title">{{ page.title }}</h1>
+    <p class="article-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y 年 %-m 月 %-d 日" }}</time></p>
+  </header>
+
+  {%- if page.kind == "long" %}
+    {%- if page.description %}<p class="work-summary">{{ page.description }}</p>{% endif %}
+    {%- assign intro = content | strip -%}
+    {%- if intro != "" %}{% include prose.html text=content %}{% endif %}
+
+    <section class="toc">
+      <h2 class="toc-title">目录</h2>
+      {%- if chapters.size > 0 %}
+      <ol class="toc-list">
+        {%- for c in chapters %}
+        <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
+        {%- endfor %}
+      </ol>
+      {%- else %}
+      <p class="empty">尚未发布章节。</p>
+      {%- endif %}
+    </section>
+  {%- else %}
+    {% include prose.html text=content %}
+    <p class="end-mark">（完）</p>
+  {%- endif %}
+</article>
