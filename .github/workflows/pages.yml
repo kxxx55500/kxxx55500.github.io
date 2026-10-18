@@ -1,0 +1,60 @@
+# 构建并发布网站：Jekyll 构建 → 按页面裁剪霞鹜文楷 → 发布到 GitHub Pages
+name: 发布网站
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: 按页面裁剪字体
+        run: |
+          sudo chown -R "$(id -u):$(id -g)" _site
+          pip install fonttools==4.55.3 brotli==1.1.0
+          mkdir -p "$RUNNER_TEMP/fonts"
+          for w in Regular Medium; do
+            curl -sSfL -o "$RUNNER_TEMP/fonts/LXGWWenKai-$w.ttf" \
+              "https://github.com/lxgw/LxgwWenKai/releases/download/v1.522/LXGWWenKai-$w.ttf"
+          done
+          (cd "$RUNNER_TEMP/fonts" && sha256sum -c) <<'SUMS'
+          39ad71264b588165b469e35e6afb162a378dacd1f95348160240ba9038ac3009  LXGWWenKai-Regular.ttf
+          d4bdeb38a39151d74d084cba5090f8cb7d20bf83eedb78c35939ae70b9f4e3f6  LXGWWenKai-Medium.ttf
+          SUMS
+          python _tools/subset_pages.py _site "$RUNNER_TEMP/fonts/LXGWWenKai-Regular.ttf" "$RUNNER_TEMP/fonts/LXGWWenKai-Medium.ttf"
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
