@@ -1,12 +1,11 @@
 /* ———— 色彩与字体 ———— */
 :root {
   --bg: #fcfbf9;
-  --text: #2c2b29;
+  --text: #262523;
   --muted: #8f8a82;
   --faint: #e9e6e0;
   --accent: #5f6b47;          /* 橄榄绿，呼应首页插画 */
-  --serif: "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", "Noto Serif SC",
-           "STSong", "SimSun", serif;
+  --font: "LXGW WenKai", "Kaiti SC", "STKaiti", "KaiTi", "楷体", serif;   /* 文楷未加载完时用系统楷体 */
   --fs: 17px;
   --measure: calc(var(--fs) * 32);   /* 正文每行约 32 字，不随局部字号变化 */
   --wide: 56rem;                     /* 首页双栏宽度 */
@@ -20,7 +19,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #191a18;
-    --text: #dcd8cf;
+    --text: #e2ded6;
     --muted: #8a867e;
     --faint: #30312d;
     --accent: #a9b68a;
@@ -39,7 +38,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: var(--serif);
+  font-family: var(--font);
   font-size: var(--fs);
   line-height: 1.9;
   -webkit-font-smoothing: antialiased;
@@ -84,7 +83,7 @@ a:hover { color: var(--accent); }
   letter-spacing: .12em;
 }
 
-.site-title { font-weight: 600; }
+.site-title { font-weight: 500; }
 .home .site-header .site-title { visibility: hidden; }   /* 首页已有大标题 */
 
 .site-nav a { margin-left: 1.4em; color: var(--muted); }
@@ -115,7 +114,7 @@ a:hover { color: var(--accent); }
 .intro-title {
   margin: 0;
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: .18em;
   line-height: 1.5;
 }
@@ -152,7 +151,7 @@ a:hover { color: var(--accent); }
 .work-title {
   margin: 0;
   font-size: 1.15rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: .06em;
   line-height: 1.5;
   transition: color .2s;
@@ -237,7 +236,7 @@ a:hover { color: var(--accent); }
 .article-title {
   margin: 0;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.5;
   letter-spacing: .12em;
   text-wrap: balance;
@@ -253,7 +252,6 @@ a:hover { color: var(--accent); }
 /* ———— 正文排版 ———— */
 .prose {
   text-align: justify;
-  letter-spacing: .02em;
   hanging-punctuation: allow-end;
   line-break: strict;
   overflow-wrap: break-word;
@@ -272,7 +270,7 @@ a:hover { color: var(--accent); }
 .prose h3 {
   margin: 2.5em 0 1.2em;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 500;
   text-align: center;
   letter-spacing: .12em;
 }
@@ -300,7 +298,7 @@ a:hover { color: var(--accent); }
 }
 
 .prose em { font-style: normal; text-emphasis: dot; -webkit-text-emphasis: dot; text-emphasis-position: under right; }
-.prose strong { font-weight: 600; }
+.prose strong { font-weight: 500; }
 .prose a { color: var(--accent); }
 
 .prose img {
@@ -309,14 +307,6 @@ a:hover { color: var(--accent); }
   height: auto;
   margin: 2em auto;
   border-radius: 3px;
-}
-
-.end-mark {
-  margin: 2.5rem 0 0;
-  text-align: center;
-  color: var(--muted);
-  font-size: .8rem;
-  letter-spacing: .3em;
 }
 
 /* ———— 长篇目录 ———— */
