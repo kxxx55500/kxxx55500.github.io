@@ -1,4 +1,4 @@
-# 构建并发布网站：Jekyll 构建 → 按页面裁剪霞鹜文楷 → 发布到 GitHub Pages
+# 构建并发布网站：生成画廊图片 → Jekyll 构建 → 按页面裁剪霞鹜文楷 → 发布到 GitHub Pages
 name: 发布网站
 
 on:
@@ -21,19 +21,23 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: 生成画廊图片
+        run: |
+          pip install fonttools==4.55.3 brotli==1.1.0 pillow==11.0.0 pyyaml==6.0.2
+          python _tools/build_gallery.py
+
       - uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
 
-      - uses: actions/setup-python@v7
-        with:
-          python-version: "3.12"
-
       - name: 按页面裁剪字体
         run: |
           sudo chown -R "$(id -u):$(id -g)" _site
-          pip install fonttools==4.55.3 brotli==1.1.0
           mkdir -p "$RUNNER_TEMP/fonts"
           for w in Regular Medium; do
             curl -sSfL -o "$RUNNER_TEMP/fonts/LXGWWenKai-$w.ttf" \

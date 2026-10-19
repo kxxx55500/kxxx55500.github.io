@@ -5,3 +5,7 @@ _site/
 vendor/
 Gemfile.lock
 *:Zone.Identifier
+
+# 画廊图片由 _tools/build_gallery.py 在构建时生成
+assets/images/gallery/
+_data/gallery_built.json

@@ -109,6 +109,35 @@ collections:
         widget: markdown
         editor_components: [image, hr]
 
+  - name: gallery
+    label: 画廊
+    description: 上传原图即可，网站发布时会自动压缩。拖动可以调整顺序。
+    files:
+      - name: gallery
+        label: 画廊
+        file: _data/gallery.yml
+        fields:
+          - name: items
+            label: 图片
+            label_singular: 图片
+            widget: list
+            root: true
+            summary: "{{title}}"
+            fields:
+              - name: title
+                label: 标题
+              - name: image
+                label: 图片
+                widget: image
+                media_folder: /figures
+                public_folder: /figures
+                hint: 直接上传原图即可，网站发布时会自动压缩。
+              - name: alt
+                label: 画面描述（可选）
+                widget: text
+                required: false
+                hint: 简单描述画面内容，供读屏软件和搜索引擎使用；不填则使用标题。
+
   - name: pages
     label: 页面
     files:
