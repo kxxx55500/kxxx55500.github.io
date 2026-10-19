@@ -82,3 +82,8 @@
 - 所有图片同一显示高度（min(64vh, 125vw, 760px)，object-fit: contain），竖图横图交替时标题与翻页栏位置不跳。
 - 页码由脚本改写，数字不一定出现在静态 HTML 中 → subset_pages 的额外字符加入 0–9 与「/」。
 - 测试：电脑端按钮与方向键翻页、首末页按钮禁用均正常；手机端用 CDP synthesizeScrollGesture 模拟滑动无效（负结果：测试手段问题），改用逐帧 dispatchTouchEvent 模拟手指，iPhone 13 / Pixel 7 左右滑动各翻一页正常；画廊（含翻页栏）在 1440×900、iPhone 13、Pixel 7 上均一屏可见。
+
+## 2026-10-19　图标缓存
+
+- 用户反映 Logo 没变：线上 favicon.svg 已是新图，问题在浏览器独立的图标缓存（地址不变就长期沿用旧图标）；旧版 Safari 也不支持 SVG 图标。
+- 图标链接加 `?v=2`；补充 32px PNG 图标与 favicon.ico（16/32/48）。以后换图标时把 v 加一。

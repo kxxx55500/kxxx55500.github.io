@@ -10,8 +10,10 @@
   {%- comment -%} 霞鹜文楷：本站自托管，按需只下载页面用到的字 {%- endcomment %}
   <link rel="stylesheet" href="{{ '/assets/fonts/wenkai.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}">
+  {%- comment -%} 图标地址带版本号：更换图标时改 v，浏览器才会放弃旧缓存 {%- endcomment %}
+  <link rel="icon" href="{{ '/favicon.svg' | relative_url }}?v=2" type="image/svg+xml">
+  <link rel="icon" href="{{ '/favicon-32.png' | relative_url }}?v=2" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}?v=2">
 </head>
 <body class="{{ page.body_class | default: 'page' }}">
   <header class="site-header">
