@@ -5,11 +5,11 @@ body_class: home
 {%- assign works = site.works | sort: "date" | reverse -%}
 <div class="home-grid">
   <figure class="frontispiece">
-    <img src="{{ '/assets/images/frontispiece-640.webp' | relative_url }}"
-         srcset="{{ '/assets/images/frontispiece-640.webp' | relative_url }} 640w, {{ '/assets/images/frontispiece-1000.webp' | relative_url }} 1000w"
-         sizes="(min-width: 760px) 360px, (min-width: 640px) 612px, 100vw"
-         width="1000" height="1250" fetchpriority="high"
-         alt="插画：开满白花的石板街上，抱着书的金发少年回眸微笑，远处是河、石桥与城堡">
+    <img src="{{ '/assets/images/cover-640.webp' | relative_url }}"
+         srcset="{{ '/assets/images/cover-640.webp' | relative_url }} 640w, {{ '/assets/images/cover-1000.webp' | relative_url }} 1000w"
+         sizes="(min-width: 760px) 400px, (min-width: 640px) 612px, 100vw"
+         width="1000" height="945" fetchpriority="high"
+         alt="插画：洒满阳光的书桌前，金发少年托着脸颊，握着笔微笑写作，窗外远处是城堡的尖塔">
   </figure>
 
   <div class="home-body">
