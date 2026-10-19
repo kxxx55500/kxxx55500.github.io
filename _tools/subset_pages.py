@@ -21,7 +21,7 @@ from fontTools.ttLib import TTFont
 
 LINK = '<link rel="stylesheet" href="/assets/fonts/wenkai.css">'
 FAMILY = "LXGW WenKai"
-CSS_EXTRA = "＊　"  # 样式里用 content 生成的字（场景分隔线）
+CSS_EXTRA = "＊　0123456789/"  # 样式或脚本生成的字：场景分隔线、画廊页码
 BOLD_TAGS = r"<(h1|h2|h3|strong)\b[^>]*>(.*?)</\1>|<a class=\"site-title\"[^>]*>(.*?)</a>"
 
 

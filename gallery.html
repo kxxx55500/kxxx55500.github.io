@@ -5,22 +5,63 @@ layout: default
 body_class: gallery-page
 description: 圣莱纳镇的插画。
 ---
+{%- assign items = site.data.gallery_built -%}
 <article class="article">
   <header class="article-head">
     <h1 class="article-title">画廊</h1>
   </header>
 
-  <div class="gallery">
-    {%- for g in site.data.gallery_built %}
-    <figure class="gallery-item">
-      <img src="{{ g.small | relative_url }}"
-           srcset="{{ g.small | relative_url }} 800w, {{ g.full | relative_url }} {{ g.width }}w"
-           sizes="(min-width: 760px) 640px, 100vw"
-           width="{{ g.width }}" height="{{ g.height }}"
-           {% unless forloop.first %}loading="lazy" {% endunless %}decoding="async"
-           alt="{{ g.alt }}">
-      <figcaption>{{ g.title }}</figcaption>
-    </figure>
-    {%- endfor %}
+  <div class="carousel" aria-roledescription="carousel" aria-label="画廊">
+    <div class="carousel-track" tabindex="0">
+      {%- for g in items %}
+      <figure class="slide" aria-label="{{ forloop.index }} / {{ items.size }}">
+        <img src="{{ g.small | relative_url }}"
+             srcset="{{ g.small | relative_url }} 800w, {{ g.full | relative_url }} {{ g.width }}w"
+             sizes="(min-width: 760px) 720px, 100vw"
+             width="{{ g.width }}" height="{{ g.height }}"
+             {% if forloop.index > 2 %}loading="lazy" {% endif %}decoding="async" draggable="false"
+             alt="{{ g.alt }}">
+        <figcaption>{{ g.title }}</figcaption>
+      </figure>
+      {%- endfor %}
+    </div>
+
+    <nav class="carousel-nav" aria-label="翻页">
+      <button class="carousel-btn prev" type="button" aria-label="上一张">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <span class="carousel-count"><span class="now">1</span> / {{ items.size }}</span>
+      <button class="carousel-btn next" type="button" aria-label="下一张">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </nav>
   </div>
 </article>
+
+<script>
+  // 左右翻页：手指滑动、按钮、键盘方向键
+  (() => {
+    const track = document.querySelector('.carousel-track');
+    const slides = track.children;
+    const now = document.querySelector('.carousel-count .now');
+    const prev = document.querySelector('.carousel-btn.prev');
+    const next = document.querySelector('.carousel-btn.next');
+    const smooth = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    const index = () => Math.round(track.scrollLeft / track.clientWidth);
+    const go = i => track.scrollTo({ left: Math.max(0, Math.min(slides.length - 1, i)) * track.clientWidth, behavior: smooth });
+    const update = () => {
+      const i = index();
+      now.textContent = i + 1;
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    };
+    prev.addEventListener('click', () => go(index() - 1));
+    next.addEventListener('click', () => go(index() + 1));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') go(index() - 1);
+      if (e.key === 'ArrowRight') go(index() + 1);
+    });
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    update();
+  })();
+</script>

@@ -365,34 +365,84 @@ a:hover { color: var(--accent); }
 .chapter-nav a:hover { color: var(--accent); }
 .chapter-nav .next { text-align: right; }
 
-/* ———— 画廊 ———— */
+/* ———— 画廊（左右翻页） ———— */
 .gallery-page .site-header,
 .gallery-page .site-main,
 .gallery-page .site-footer {
-  max-width: calc(40rem + 2 * var(--gutter));
+  max-width: calc(46rem + 2 * var(--gutter));
 }
 
-.gallery-item {
-  margin: 0 0 3.5rem;
+.gallery-page .article { padding-top: 1rem; }
+.gallery-page .article-head { margin-bottom: 1.5rem; }
+.gallery-page .article-head::after { display: none; }   /* 画廊页省去标题下的短线，留给图片 */
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  outline: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.slide {
+  flex: 0 0 100%;
+  margin: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
-.gallery-item img {
+.slide img {
   display: block;
-  width: auto;
-  max-width: 100%;
-  max-height: 84vh;        /* 竖图也能连同标题完整放进一屏 */
-  height: auto;
-  margin: 0 auto;
-  border-radius: 3px;
-  background: var(--faint);
+  width: 100%;
+  height: min(64vh, 125vw, 760px);   /* 所有图同高，竖图横图交替时标题位置不跳 */
+  object-fit: contain;
+  user-select: none;
 }
 
-.gallery-item figcaption {
-  margin-top: .9rem;
+.slide figcaption {
+  margin-top: .8rem;
   text-align: center;
-  color: var(--muted);
-  font-size: .85rem;
+  color: var(--text);
+  font-size: .95rem;
   letter-spacing: .16em;
+}
+
+.carousel-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: .3rem;
+  color: var(--muted);
+  font-size: .8rem;
+  letter-spacing: .12em;
+}
+
+.carousel-btn {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: color .2s, opacity .2s;
+}
+.carousel-btn:hover { color: var(--accent); }
+.carousel-btn:disabled { opacity: .25; cursor: default; color: var(--muted); }
+.carousel-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* ———— 其他 ———— */
