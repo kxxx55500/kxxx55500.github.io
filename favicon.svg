@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#5f6b47"/><text x="32" y="45" font-size="38" text-anchor="middle" fill="#fcfbf9" font-family="Kaiti SC, KaiTi, serif">文</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#5f6b47"/><path d="M47 13 C 34 16 24 28 20 44 L 23 45 C 27 34 33 27 40 23 C 35 28 30 35 27 44 C 38 41 46 30 47 13 Z" fill="#fcfbf9"/><path d="M19 49 L 23 42" stroke="#fcfbf9" stroke-width="2.6" stroke-linecap="round"/></svg>

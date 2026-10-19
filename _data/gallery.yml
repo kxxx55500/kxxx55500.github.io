@@ -1,0 +1,30 @@
+# 画廊图片（按顺序显示）。图片用 _tools/gallery_image.py 生成到 assets/images/gallery/
+- title: 早晨
+  file: morning
+  width: 1086
+  height: 1448
+  alt: 清晨洒满阳光的卧室里，戴着睡帽的金发少年坐在床上揉着眼睛
+
+- title: 克拉拉给儿子化妆
+  file: makeup
+  width: 1086
+  height: 1448
+  alt: 梳妆镜前，棕发的母亲用小刷子为扎着发带的金发少年上妆
+
+- title: 街角的艾里亚斯
+  file: street
+  width: 1122
+  height: 1402
+  alt: 开满白花的石板街上，抱着书的金发少年回眸微笑，远处是河、石桥与城堡
+
+- title: 艾里亚斯和伊莲娜
+  file: elena
+  width: 1122
+  height: 1402
+  alt: 提着花篮的棕发少女与金发少年手牵手走在河边的石板路上
+
+- title: 修女和艾里亚斯
+  file: picnic
+  width: 1448
+  height: 1086
+  alt: 湖畔花树下的野餐，白衣修女端着茶杯，金发少年吃着水果挞与她交谈

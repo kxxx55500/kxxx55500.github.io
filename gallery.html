@@ -1,0 +1,26 @@
+---
+title: 画廊
+permalink: /gallery/
+layout: default
+body_class: gallery-page
+description: 圣莱纳镇的插画。
+---
+<article class="article">
+  <header class="article-head">
+    <h1 class="article-title">画廊</h1>
+  </header>
+
+  <div class="gallery">
+    {%- for g in site.data.gallery %}
+    <figure class="gallery-item">
+      <img src="{{ '/assets/images/gallery/' | append: g.file | append: '-800.webp' | relative_url }}"
+           srcset="{{ '/assets/images/gallery/' | append: g.file | append: '-800.webp' | relative_url }} 800w, {{ '/assets/images/gallery/' | append: g.file | append: '-full.webp' | relative_url }} {{ g.width }}w"
+           sizes="(min-width: 760px) 640px, 100vw"
+           width="{{ g.width }}" height="{{ g.height }}"
+           {% unless forloop.first %}loading="lazy" {% endunless %}decoding="async"
+           alt="{{ g.alt }}">
+      <figcaption>{{ g.title }}</figcaption>
+    </figure>
+    {%- endfor %}
+  </div>
+</article>
