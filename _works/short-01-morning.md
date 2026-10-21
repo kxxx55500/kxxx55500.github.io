@@ -1,5 +1,5 @@
 ---
-title: 早晨
+title: 早晨 01
 key: short-01-morning
 kind: short
 date: 2026-10-17
