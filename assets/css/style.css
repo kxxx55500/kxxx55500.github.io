@@ -354,11 +354,31 @@ a:hover { color: var(--accent); }
 }
 
 .chapter-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
   padding: .5rem 0;
   color: var(--muted);
 }
 .chapter-nav a:hover { color: var(--accent); }
-.chapter-nav .next { text-align: right; }
+.chapter-nav .next { text-align: right; align-items: flex-end; }
+.chapter-nav .index { padding: .5rem 1rem; }
+
+.nav-title {
+  font-size: .78rem;
+  letter-spacing: .04em;
+  color: var(--text);
+  opacity: .75;
+}
+
+.to-be-continued {
+  margin: 3rem 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: .8rem;
+  letter-spacing: .4em;
+  text-indent: .4em;
+}
 
 /* ———— 画廊（左右翻页） ———— */
 .gallery-page .site-header,

@@ -6,7 +6,13 @@
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#fcfbf9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#191a18" media="(prefers-color-scheme: dark)">
+  {%- if page.collection == "chapters" %}
+  {%- assign work = site.works | where: "slug", page.work | first %}
+  <title>{{ page.order }}. {{ page.title }} · {{ work.title }} | {{ site.title }}</title>
+  {% seo title=false %}
+  {%- else %}
   {% seo %}
+  {%- endif %}
   {%- comment -%} 霞鹜文楷：本站自托管，按需只下载页面用到的字 {%- endcomment %}
   <link rel="stylesheet" href="{{ '/assets/fonts/wenkai.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">

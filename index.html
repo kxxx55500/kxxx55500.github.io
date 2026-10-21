@@ -2,7 +2,8 @@
 layout: default
 body_class: home
 ---
-{%- assign works = site.works | sort: "date" | reverse -%}
+{%- comment -%} 按阅读顺序：发布日期早的在前 {%- endcomment -%}
+{%- assign works = site.works | sort: "date" -%}
 <div class="home-grid">
   <figure class="frontispiece">
     <img src="{{ '/assets/images/cover-640.webp' | relative_url }}"

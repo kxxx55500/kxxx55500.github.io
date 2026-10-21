@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <title>页面已移动 | {{ site.title }}</title>
+  <link rel="canonical" href="{{ page.redirect_to | absolute_url }}">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url={{ page.redirect_to | relative_url }}">
+</head>
+<body>
+  <p>页面已移动到 <a href="{{ page.redirect_to | relative_url }}">这里</a>。</p>
+</body>
+</html>

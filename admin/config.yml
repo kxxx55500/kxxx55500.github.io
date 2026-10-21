@@ -50,6 +50,7 @@ collections:
         options: [连载中, 已完结]
       - name: date
         label: 发布日期
+        hint: 首页按这个日期从早到晚排列（阅读顺序）。想调整作品顺序时，改这个日期即可。
         widget: datetime
         type: date
         default: "{{now}}"
@@ -79,7 +80,7 @@ collections:
     slug:
       template: "{{order}}"
       editable: false
-    summary: "{{work}}　·　{{title}}"
+    summary: "{{work}}　·　{{order}}. {{title}}"
     sortable_fields: [work, order]
     view_groups:
       - { label: 作品, field: work }
@@ -99,7 +100,7 @@ collections:
         min: 1
       - name: title
         label: 章节标题
-        hint: 例如「第三章　归途」
+        hint: 例如「早晨 1」。网站会自动在前面加上序号，显示为「1. 早晨 1」，这里不用再写序号。
       - name: published
         label: 公开
         widget: boolean

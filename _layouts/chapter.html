@@ -13,14 +13,24 @@ layout: default
 <article class="article">
   <header class="article-head">
     {%- if work %}<p class="article-kicker"><a href="{{ work.url | relative_url }}">{{ work.title }}</a></p>{% endif %}
-    <h1 class="article-title">{{ page.title }}</h1>
+    <h1 class="article-title">{{ page.order }}. {{ page.title }}</h1>
   </header>
 
   {% include prose.html text=content %}
 
+  {%- if next_i >= chapters.size and work.status == "连载中" %}
+  <p class="to-be-continued">未完待续</p>
+  {%- endif %}
+
   <nav class="chapter-nav">
-    {%- if i > 0 %}<a class="prev" href="{{ chapters[prev_i].url | relative_url }}">上一章</a>{% else %}<span class="prev"></span>{% endif %}
-    {%- if work %}<a class="index" href="{{ work.url | relative_url }}">目录</a>{% endif %}
-    {%- if next_i < chapters.size %}<a class="next" href="{{ chapters[next_i].url | relative_url }}">下一章</a>{% else %}<span class="next"></span>{% endif %}
+    {%- if i > 0 %}{% assign p = chapters[prev_i] %}
+    <a class="prev" href="{{ p.url | relative_url }}"><span class="nav-label">上一章</span><span class="nav-title">{{ p.order }}. {{ p.title }}</span></a>
+    {%- else %}<span class="prev"></span>{% endif %}
+    {%- if work %}
+    <a class="index" href="{{ work.url | relative_url }}">目录</a>
+    {%- endif %}
+    {%- if next_i < chapters.size %}{% assign n = chapters[next_i] %}
+    <a class="next" href="{{ n.url | relative_url }}"><span class="nav-label">下一章</span><span class="nav-title">{{ n.order }}. {{ n.title }}</span></a>
+    {%- else %}<span class="next"></span>{% endif %}
   </nav>
 </article>

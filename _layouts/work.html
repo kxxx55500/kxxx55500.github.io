@@ -21,7 +21,7 @@ layout: default
       {%- if chapters.size > 0 %}
       <ol class="toc-list">
         {%- for c in chapters %}
-        <li><a href="{{ c.url | relative_url }}">{{ c.title }}</a></li>
+        <li><a href="{{ c.url | relative_url }}">{{ c.order }}. {{ c.title }}</a></li>
         {%- endfor %}
       </ol>
       {%- else %}
